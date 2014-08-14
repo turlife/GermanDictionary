@@ -15,4 +15,6 @@ public interface WordService {
 	void deleteWord(Word word);
 	
 	List<Word> getWords();
+	
+	void deleteWordById(int id);
 }

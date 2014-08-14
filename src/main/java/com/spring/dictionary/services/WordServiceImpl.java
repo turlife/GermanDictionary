@@ -52,4 +52,11 @@ public class WordServiceImpl implements WordService{
 	public List<Word> getWords() {
 		return wordDAO.getWords();
 	}
+	
+	@Override
+	@Transactional
+	public void deleteWordById(int id){
+		logger.debug("delete word with id" + id);
+		wordDAO.deleteWordById(id);
+	}
 }

@@ -15,4 +15,6 @@ public interface WordDAO {
 	void deleteWord(Word word);
 	
 	public List<Word> getWords();
+	
+	void deleteWordById(int id);
 }

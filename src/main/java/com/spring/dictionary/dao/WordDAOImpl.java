@@ -44,7 +44,14 @@ public class WordDAOImpl implements WordDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Word> getWords() {
+		logger.debug("select all words");
 		return sessionFactory.getCurrentSession().createQuery("from Word").list();
+	}
+	
+	
+	public void deleteWordById(int id){
+		logger.debug("delete word with id " + id);
+		sessionFactory.getCurrentSession().delete(findWordById(id));
 	}
 	
 }

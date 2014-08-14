@@ -3,16 +3,19 @@ package com.spring.dictionary.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
-public class Word {
+public class Word implements Comparable<Word>{
 	
 	@Id
     @GeneratedValue
 	private Integer id;
 	
+	@Size(min = 1, message = "Required field")
 	private String word_de;
 	
+	@Size(min = 1, message = "Required field")
 	private String word_eng;
 	
 	public Integer getId() {
@@ -32,6 +35,16 @@ public class Word {
 	}
 	public void setWord_eng(String word_eng) {
 		this.word_eng = word_eng;
+	}
+	
+	@Override
+	public int compareTo(Word o) {
+		if ((this.getWord_de()).equals(o.getWord_de()))
+            return 0;
+        else if (this.getWord_de().compareTo(o.word_de) > 0)
+            return 1;
+        else
+            return -1;
 	}
 	
 	
