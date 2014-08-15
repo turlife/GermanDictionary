@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
-encoding//src/main/resources/dict.txt=ISO-8859-1
+encoding//src/main/java/com/spring/dictionary/engine/WordEngineConverter.java=ISO-8859-1
+encoding//src/main/resources/dict_eng_ger.txt=ISO-8859-1
+encoding/<project>=ISO-8859-1

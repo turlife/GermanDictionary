@@ -16,11 +16,12 @@ ${message}<br/>
 
 <table border="1">
 <tr>
-<th width="10%">#</th><th width="15%">German</th><th width="10%">English</th><th width="10%">actions</th>
+<th width="10%">#</th><th width="10%">Article</th><th width="15%">German</th><th width="10%">English</th><th width="10%">actions</th>
 </tr>
 <c:forEach var="word" items="${wordList}" varStatus="theCount">
 <tr>
 	<td align="center">${theCount.count}</td>
+	<td align="center">${word.article}</td>
 	<td align="center">${word.word_de}</td>
 	<td align="center">${word.word_eng}</td>
 	<td align="center">

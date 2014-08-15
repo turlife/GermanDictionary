@@ -23,6 +23,9 @@ public class WordServiceImpl implements WordService{
 	@Transactional
 	public void persistWord(Word word) {
 		logger.debug("save word " + word.getWord_eng());
+		//must check if word in vocabulary
+		
+		
 		wordDAO.persistWord(word);
 	}
 
@@ -58,5 +61,12 @@ public class WordServiceImpl implements WordService{
 	public void deleteWordById(int id){
 		logger.debug("delete word with id" + id);
 		wordDAO.deleteWordById(id);
+	}
+	
+	@Override
+	@Transactional
+	public boolean isEngAndGerWordExist(Word word){
+		logger.debug("isEngAndGerWordExist");
+		return wordDAO.isEngAndGerWordExist(word);
 	}
 }

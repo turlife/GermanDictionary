@@ -17,4 +17,6 @@ public interface WordDAO {
 	public List<Word> getWords();
 	
 	void deleteWordById(int id);
+	
+	boolean isEngAndGerWordExist(Word word);
 }

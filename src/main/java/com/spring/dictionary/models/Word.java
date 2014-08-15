@@ -3,7 +3,16 @@ package com.spring.dictionary.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Size;
+
+@NamedQueries({
+	@NamedQuery(
+	name = "findWordByEngAndGer",
+	query = "from Word s where s.word_eng = :word_eng and s.word_de = :word_de"
+	)
+})
 
 @Entity
 public class Word implements Comparable<Word>{
@@ -18,6 +27,14 @@ public class Word implements Comparable<Word>{
 	@Size(min = 1, message = "Required field")
 	private String word_eng;
 	
+	private String article;
+	
+	public String getArticle() {
+		return article;
+	}
+	public void setArticle(String article) {
+		this.article = article;
+	}
 	public Integer getId() {
 		return id;
 	}

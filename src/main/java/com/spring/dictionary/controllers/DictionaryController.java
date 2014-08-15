@@ -1,5 +1,6 @@
 package com.spring.dictionary.controllers;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -17,12 +18,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.spring.dictionary.models.Word;
 import com.spring.dictionary.services.WordService;
+import com.spring.dictionary.validators.WordValidator;
 
 @Controller
 public class DictionaryController {
@@ -31,6 +35,9 @@ public class DictionaryController {
 	
 	@Autowired
 	private WordService wordService;
+	
+	@Autowired
+	private WordValidator wordValidator;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public ModelAndView main(Locale locale, Model model) {
@@ -61,6 +68,8 @@ public class DictionaryController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
+		wordValidator.validate(word, bindingResult);
+			
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("add-word");
 			logger.info("not valid word");
@@ -116,6 +125,20 @@ public class DictionaryController {
 		redirectAttributes.addFlashAttribute("message", "Word was successfully deleted.");
 		logger.debug("in deleteWord");
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/getGerman", method = RequestMethod.GET)
+	public @ResponseBody
+	List<String> getWords(@RequestParam String word_de) {
+		logger.debug("ajax");
+		List<String> result = new ArrayList<String>();
+		 
+		for(Word word : wordService.getWords()){
+			result.add(word.getWord_de());
+		}
+		
+		return result;
+ 
 	}
 	
 }

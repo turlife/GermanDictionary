@@ -2,6 +2,8 @@ package com.spring.dictionary.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +54,19 @@ public class WordDAOImpl implements WordDAO{
 	public void deleteWordById(int id){
 		logger.debug("delete word with id " + id);
 		sessionFactory.getCurrentSession().delete(findWordById(id));
+	}
+	
+	public boolean isEngAndGerWordExist(Word word){
+		logger.debug("isEngAndGerWordExist");
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("findWordByEngAndGer");
+		query.setString("word_eng", word.getWord_eng());
+		query.setString("word_de", word.getWord_de());
+		List<?> list = query.list();
+		if(list != null && list.isEmpty()){
+			logger.debug("no entry with this params");
+			return false;
+		}
+		return true;
 	}
 	
 }
