@@ -19,4 +19,6 @@ public interface WordService {
 	void deleteWordById(int id);
 	
 	boolean isEngAndGerWordExist(Word word);
+	
+	String getEnglishWord(String germanWord);
 }

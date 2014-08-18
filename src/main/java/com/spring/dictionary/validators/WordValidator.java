@@ -25,7 +25,7 @@ public class WordValidator implements Validator{
 		Word word = (Word) target;
 		
 		if (wordService.isEngAndGerWordExist(word)){
-			errors.rejectValue("word_de", "uploadForm.selectFile", "Error!!!");
+			errors.rejectValue("word_de", "uploadForm.selectFile", "The word exists in dictionary");
 		}
 		
 	}

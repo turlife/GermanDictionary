@@ -1,6 +1,5 @@
 package com.spring.dictionary.controllers;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.spring.dictionary.engine.WordEngine;
 import com.spring.dictionary.models.Word;
 import com.spring.dictionary.services.WordService;
 import com.spring.dictionary.validators.WordValidator;
@@ -127,18 +127,17 @@ public class DictionaryController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/getGerman", method = RequestMethod.GET)
+	@RequestMapping(value = "/fillFields", method = RequestMethod.GET, produces = { "text/html; charset=UTF-8" })
 	public @ResponseBody
-	List<String> getWords(@RequestParam String word_de) {
-		logger.debug("ajax");
-		List<String> result = new ArrayList<String>();
-		 
-		for(Word word : wordService.getWords()){
-			result.add(word.getWord_de());
+	String checkStrength(@RequestParam String word_de) {
+		logger.debug("word_de: " + word_de);
+		String engWord = WordEngine.getEnglishWord(word_de);
+		logger.debug("engWord: " + engWord);
+		if(engWord != null && !engWord.trim().isEmpty()){
+			return engWord;
 		}
 		
-		return result;
- 
+		return null;
 	}
 	
 }

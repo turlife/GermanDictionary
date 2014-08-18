@@ -24,8 +24,6 @@ public class WordServiceImpl implements WordService{
 	public void persistWord(Word word) {
 		logger.debug("save word " + word.getWord_eng());
 		//must check if word in vocabulary
-		
-		
 		wordDAO.persistWord(word);
 	}
 
@@ -68,5 +66,11 @@ public class WordServiceImpl implements WordService{
 	public boolean isEngAndGerWordExist(Word word){
 		logger.debug("isEngAndGerWordExist");
 		return wordDAO.isEngAndGerWordExist(word);
+	}
+
+	@Override
+	public String getEnglishWord(String germanWord) {
+		
+		return null;
 	}
 }

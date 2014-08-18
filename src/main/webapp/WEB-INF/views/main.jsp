@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ page session="false" %>
 <html>
 <head>
@@ -9,14 +10,14 @@
 	Dictionary  
 </h1>
 
-<a href="${pageContext.request.contextPath}/add.html">Add word</a><br/>
+<a href="${pageContext.request.contextPath}/add.html"><spring:message code="add_word" /></a><br/>
 
 
 ${message}<br/>
 
 <table border="1">
 <tr>
-<th width="10%">#</th><th width="10%">Article</th><th width="15%">German</th><th width="10%">English</th><th width="10%">actions</th>
+<th width="10%">#</th><th width="10%"><spring:message code="article" /></th><th width="15%"><spring:message code="german" /></th><th width="10%"><spring:message code="english" /></th><th width="10%"><spring:message code="actions" /></th>
 </tr>
 <c:forEach var="word" items="${wordList}" varStatus="theCount">
 <tr>
@@ -25,8 +26,8 @@ ${message}<br/>
 	<td align="center">${word.word_de}</td>
 	<td align="center">${word.word_eng}</td>
 	<td align="center">
-		<a href="${pageContext.request.contextPath}/edit/${word.id}.html">Edit</a><br/>
-		<a href="${pageContext.request.contextPath}/delete/${word.id}.html">Delete</a><br/>
+		<a href="${pageContext.request.contextPath}/edit/${word.id}.html"><spring:message code="edit" /></a><br/>
+		<a href="${pageContext.request.contextPath}/delete/${word.id}.html"><spring:message code="delete" /></a><br/>
 	</td>
 </tr>
 </c:forEach>
