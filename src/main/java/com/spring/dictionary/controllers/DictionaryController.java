@@ -131,10 +131,11 @@ public class DictionaryController {
 	public @ResponseBody
 	String checkStrength(@RequestParam String word_de) {
 		logger.debug("word_de: " + word_de);
-		String engWord = WordEngine.getEnglishWord(word_de);
-		logger.debug("engWord: " + engWord);
-		if(engWord != null && !engWord.trim().isEmpty()){
-			return engWord;
+		String[] engWord = WordEngine.getEnglishWord(word_de);
+		
+		if(engWord != null && engWord[1] != null){
+			logger.debug("return array");
+			return engWord[0] + "&" + engWord[1];
 		}
 		
 		return null;

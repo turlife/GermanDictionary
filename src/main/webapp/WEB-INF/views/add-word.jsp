@@ -11,22 +11,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Add word page</title>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script type="text/javascript">
-    function doAjax() {
-      $.ajax({
-        url: 'fillFields',
-        data: ({word_de : $('#word_de').val()}),
-        success: function(data) {
-         	console.log(data);
-         	/* $('#word_eng').val($(data).text()); */
-         	/* $('#word_eng').setValue(data) */
-         	$("#word_eng").val(data);  
-        }
-      });
-    }
-  </script>
+	function doAjax() {
+		$.ajax({
+			url : 'fillFields',
+			type : 'GET',
+			data : ({
+				word_de : $('#word_de').val()
+			}),
+			success : function(data) {
+				if (data != null) {
+					console.log(data);
+					$("#word_eng").val(data.split("&")[1]);
+					$("#word_article").val(data.split("&")[0]);
+				}
+			}
+		});
+	}
+</script>
 
 
 </head>
@@ -38,20 +43,24 @@
 		action="${pageContext.request.contextPath}/add.html">
 		<table>
 			<tbody>
+
 				<tr>
-					<td><form:label path="article" /><spring:message code="article" />:</td>
-					<td><form:input path="article" /></td>
-					<td><form:errors path="article" /></td>
+					<th width="10%"><form:label path="article" /> <spring:message
+							code="article" />:</th>
+					<th width="15%"><form:label path="word_de" /> <spring:message
+							code="german" />:</th>
+					<th width="10%"><form:label path="word_eng" /> <spring:message
+							code="english" />:</th>
 				</tr>
 				<tr>
-					<td><form:label path="word_de" /><spring:message code="german" />:</td>
-					<td><form:input path="word_de" id="word_de" onkeydown = "doAjax()"/></td>
-					<td><form:errors path="word_de" /></td>
+					<td align="center"><form:input path="article" id="word_article" /></td>
+					<td align="center"><form:input path="word_de" id="word_de" onkeyup="doAjax()"/></td>
+					<td align="center"><form:input path="word_eng" id="word_eng" /></td>
 				</tr>
 				<tr>
-					<td><form:label path="word_eng" /><spring:message code="english" />:</td>
-					<td><form:input path="word_eng" id="word_eng"/></td>
-					<td><form:errors path="word_eng" /></td>
+					<td align="center"><form:errors path="article" /></td>
+					<td align="center"><form:errors path="word_de" /></td>
+					<td align="center"><form:errors path="word_eng" /></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="<spring:message code="add" />" /></td>
@@ -62,7 +71,8 @@
 	</form:form>
 
 	<p>
-		<a href="${pageContext.request.contextPath}/main.html"><spring:message code="main_page" /></a>
+		<a href="${pageContext.request.contextPath}/main.html"><spring:message
+				code="main_page" /></a>
 	</p>
 </body>
 </html>

@@ -3,4 +3,3 @@ encoding//src/main/java/com/spring/dictionary/controllers/DictionaryController.j
 encoding//src/main/java/com/spring/dictionary/engine/WordEngineConverter.java=ISO-8859-1
 encoding//src/main/resources/dict_eng_ger.txt=ISO-8859-1
 encoding//src/main/webapp/WEB-INF/locales/messages_en.properties=UTF-8
-encoding/<project>=ISO-8859-1
